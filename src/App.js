@@ -1,4 +1,5 @@
 import "./App.css";
+import Avatar from "./Props";
 
 import Tile, { A, B } from "./Tile";
 // in named imports the name's can't be changed, while the default one can have any name
@@ -23,6 +24,15 @@ function App() {
       <A />
       <B />
       <img style={{ width: "200px" }} src={imgAddress} />
+
+      <Avatar src='https://images.pexels.com/photos/18177110/pexels-photo-18177110/free-photo-of-white-horse-in-herd.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load' height="300px" width="300"/>
+      <Avatar src='https://images.pexels.com/photos/16665470/pexels-photo-16665470/free-photo-of-man-standing-on-a-bridge-in-winter.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load' height="300px" 
+      width="300"
+      
+      >
+        <div>Hello</div>
+        <div>Hi</div>
+     </Avatar>
     </>
     // <> ....</> this is a fragment, we can return a single value enclosed in fragments , the best thing about using it is that it won't leave any trace in the browser
   );
