@@ -29,7 +29,7 @@ function App() {
     console.log('decrement counter clicked ',counter)
 
   }
-
+ // conditonal rendering
   let condition = true;
   // if(condition){
   //   return <div>Hello, it is conditional based rendering </div>
@@ -52,6 +52,10 @@ function App() {
       <button onClick={incrementCounter}>Increment</button>
       <button onClick={decrementCounter}>Decrement</button>
     </>
+   
+
+
+   
   )
 }
 
