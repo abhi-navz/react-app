@@ -35,7 +35,9 @@ function App() {
   //   return <div>Hello, it is conditional based rendering </div>
   // }
 
+// rendering arrays:
 
+ const[todos, setTodos] = useState(['todo1','todo2'])
   return (
     
     <>
@@ -51,6 +53,13 @@ function App() {
      </div>
       <button onClick={incrementCounter}>Increment</button>
       <button onClick={decrementCounter}>Decrement</button>
+
+
+      Rendering Arays:
+      <h1>Todo List:</h1>
+      {todos.map((value) => <li>{value}</li>)}
+
+      <button onClick={()=> setTodos([...todos,'todo 3'])}>Click to Add</button>
     </>
    
 
