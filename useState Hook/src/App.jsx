@@ -30,18 +30,23 @@ function App() {
 
   }
 
+  let condition = true;
+  // if(condition){
+  //   return <div>Hello, it is conditional based rendering </div>
+  // }
+
 
   return (
     
     <>
      <div>
-      Count:{count}
+      Value of Count:{count} which is {(count%2 == 0 )? 'Even':'Odd'} value.
       
      </div>
       <button onClick={incrementCount}>Increment</button>
       <button onClick={decrementCount}>Decrement</button>
      <div>
-      Counter:{counter}
+     Value of Counter:{counter} which is {(counter%2 == 0 )? 'Even':'Odd'} value.
       
      </div>
       <button onClick={incrementCounter}>Increment</button>
