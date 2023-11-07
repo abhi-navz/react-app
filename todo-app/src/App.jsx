@@ -30,9 +30,9 @@ function App() {
     renderTask = mainTask.map((t,i)=>{
 
       return <li key={i} className=" flex justify-evenly items-center mb-3">
-        <div className="flex justify-between  items-center w-2/3 ">
-        <h5 className=" text-xl font-bold ">{t.title}</h5>
-        <h6 className="">{t.desc}</h6>
+        <div className=" w-2/3 ">
+        <h5 className=" text-xl font-bold break-normal ">{t.title}</h5>
+        <p className="break-normal">{t.desc}</p>
         
       </div>
       <button onClick={()=> {deleteHandler(i)}} className="text-sm bg-red-400 rounded-lg px-3 py-1 text-white">Delete</button>
@@ -76,10 +76,12 @@ function App() {
         </form>
       </div>
       <hr/>
-      <div className="bg-slate-200 p-5 mt-5 ">
+      <div className="flex justify-center">
+      <div className="bg-slate-200 p-5 mt-5 w-3/4 rounded-lg ">
         <ul className="list-disc">
           {renderTask}
         </ul>
+      </div>
       </div>
     </>
   );
