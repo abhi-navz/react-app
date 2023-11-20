@@ -1,46 +1,74 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
   const [mainTask, setMainTask] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // saving data to local storage
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(mainTask));
+  }, [mainTask]);
+
+  // retrieving data from local storage
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("tasks");
+
+    const parsedTasks = JSON.parse(storedTasks);
+
+    if(parsedTasks){
+      setMainTask(parsedTasks);
+    }
+
+  
+
+    setLoading(false);
+  }, []);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    if(!title || !desc){
-      alert("Enter both fields!")
-    }
-    else{
+    if (!title || !desc) {
+      alert("Enter both fields!");
+    } else {
+      const newTask = { title, desc };
 
-      setMainTask([...mainTask, {title, desc}])
-      console.log(mainTask)
+      setMainTask([...mainTask, newTask]);
+
       settitle("");
       setdesc("");
     }
   };
 
-  const deleteHandler = (i)=>{
-    let copyTask = [...mainTask]
-    copyTask.splice(i,1)
-    setMainTask(copyTask)
+  const deleteHandler = (i) => {
+    let copyTask = [...mainTask];
+    copyTask.splice(i, 1);
+    setMainTask(copyTask);
+  };
+
+  let renderTask = <h2>No Task Available</h2>;
+  if (!loading && mainTask.length > 0) {
+    renderTask = mainTask.map((t, i) => {
+      return (
+        <li key={i} className=" flex justify-evenly items-center mb-3">
+          <div className=" w-2/3 ">
+            <h5 className=" text-xl font-bold break-normal ">{t.title}</h5>
+            <p className="break-normal">{t.desc}</p>
+          </div>
+          <button
+            onClick={() => {
+              deleteHandler(i);
+            }}
+            className="text-sm bg-red-400 rounded-lg px-3 py-1 text-white"
+          >
+            Delete
+          </button>
+        </li>
+      );
+    });
   }
 
-  let renderTask = <h2>No Task Available</h2> 
-  if(mainTask.length>0){
-    renderTask = mainTask.map((t,i)=>{
-
-      return <li key={i} className=" flex justify-evenly items-center mb-3">
-        <div className=" w-2/3 ">
-        <h5 className=" text-xl font-bold break-normal ">{t.title}</h5>
-        <p className="break-normal">{t.desc}</p>
-        
-      </div>
-      <button onClick={()=> {deleteHandler(i)}} className="text-sm bg-red-400 rounded-lg px-3 py-1 text-white">Delete</button>
-      </li>
-    })
-    
-  }
-  
   return (
     <>
       <h1 className="bg-red-400 mt-2 text-white text-center p-5 font-bold text-3xl">
@@ -70,22 +98,18 @@ function App() {
             }}
           />
           <button className="border-2 px-4 py-1 rounded-lg mx-5 bg-purple-500 text-white">
-            
             Add task
           </button>
         </form>
       </div>
-      <hr/>
+      <hr />
       <div className="flex justify-center">
-      <div className="bg-slate-200 p-5 mt-5 w-3/4 rounded-lg ">
-        <ul className="list-disc">
-          {renderTask}
-        </ul>
-      </div>
+        <div className="bg-slate-200 p-5 mt-5 w-3/4 rounded-lg ">
+          <ul className="list-disc">{renderTask}</ul>
+        </div>
       </div>
     </>
   );
-
 }
 
 export default App;
