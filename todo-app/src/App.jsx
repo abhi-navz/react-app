@@ -4,12 +4,8 @@ import "./App.css";
 function App() {
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
-  const [mainTask, setMainTask] = useState(() => {
-    // checking if there's any local storage and if there's initializing the mainTask with the stored Tasks.
-    const storedTasks = localStorage.getItem("tasks");
-    return storedTasks ? JSON.parse(storedTasks) : [];
-  }); 
-  
+  const [mainTask, setMainTask] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // saving data to local storage
   useEffect(() => {
