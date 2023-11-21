@@ -4,15 +4,16 @@ import "./App.css";
 function App() {
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
-  const [mainTask, setMainTask] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [mainTask, setMainTask] = useState(() => {
+    // checking if there's any local storage and if there's initializing the mainTask with the stored Tasks.
+    const storedTasks = localStorage.getItem("tasks");
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  });
 
   // saving data to local storage
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(mainTask));
   }, [mainTask]);
-
-  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ function App() {
   };
 
   let renderTask = <h2>No Task Available</h2>;
-  if ( mainTask.length > 0) {
+  if (mainTask.length > 0) {
     renderTask = mainTask.map((t, i) => {
       return (
         <li key={i} className=" flex justify-evenly items-center mb-3">
