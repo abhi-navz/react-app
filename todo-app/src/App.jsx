@@ -4,8 +4,11 @@ import "./App.css";
 function App() {
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
-  const [mainTask, setMainTask] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [mainTask, setMainTask] = useState(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  }); 
+  const [loading, setLoading] = useState(false);
 
   // saving data to local storage
   useEffect(() => {
